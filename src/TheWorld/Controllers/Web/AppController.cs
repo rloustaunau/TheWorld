@@ -15,5 +15,17 @@ namespace TheWorld.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            //throw new InvalidOperationException("thrown exception!");
+
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }
