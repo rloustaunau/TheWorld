@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheWorld.ViewModels;
 using TheWorld.Services;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,10 +14,12 @@ namespace TheWorld.Controllers
     public class AppController : Controller
     {
         private IMailService _mailService;
+        private IConfigurationRoot _config;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, IConfigurationRoot config)
         {
             _mailService = mailService;
+            _config = config;
 
         }
         // GET: /<controller>/
@@ -35,9 +38,23 @@ namespace TheWorld.Controllers
         [HttpPost]
         public IActionResult Contact(ContactViewModel model)
         {
+   
+            if (model.Email.ToUpper().Contains("AOL.COM"))
+            {
+                ModelState.AddModelError("Email", "We dont support AOL addresses");
+          
+            }
 
-            _mailService.SendMail("Rafael_Loustaunau@Roundrockisd.org", model.Email, "From theWorld", model.Message);
+            if (ModelState.IsValid && ModelState.ErrorCount < 1)
+            {
+                _mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "From theWorld", model.Message);
 
+                ModelState.Clear();
+
+                ViewBag.UserMessage = "Message Sent";
+            }
+            
+                        
             return View();
         }
 
