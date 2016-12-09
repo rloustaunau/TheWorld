@@ -2,9 +2,8 @@
   "MailSettings": {
     "ToAddress": "Rafael_Loustaunau@roundrockisd.org"
 
-  } 
-
-
-
-
+  },
+  "ConnectionStrings": {
+    "WorldContextConnectionDEV": "Server=HJZKWV1\\SQLEXPRESS;Database=TheWorldDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
 }

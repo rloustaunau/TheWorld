@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using TheWorld.Services;
 using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
+using TheWorld.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace TheWorld
 {
@@ -45,22 +47,42 @@ namespace TheWorld
             {
                 //Implement a real Mail Service
             }
-    
 
-            services.AddMvc();
+            services.AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+
+            services.AddLogging();
+
+            services.AddScoped<IWorldRepository, WorldRepository>();
+    
+            services.AddMvc().AddJsonOptions(config =>
+            {
+                config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            }
+                
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+                                                        // public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            WorldContextSeedData seeder,
+            ILoggerFactory factory)
         {
-            loggerFactory.AddConsole();
+                                                        //            loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                factory.AddDebug(LogLevel.Information);
             }
-
-           // app.UseDefaultFiles();
+            else
+            {
+                factory.AddDebug(LogLevel.Error);
+            }
+                     
 
             app.UseStaticFiles();
 
@@ -72,11 +94,9 @@ namespace TheWorld
                     defaults: new { controller = "App", action = "Index" }
                     );
             });
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("<html><body><b><h2>Round Rock ISD!</b></h2></body></html>");
-            //});
+            
+            seeder.EnsureSeedData().Wait();
+          
         }
     }
 }
