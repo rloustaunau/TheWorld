@@ -31,8 +31,7 @@ namespace TheWorld.Controllers.Api
             {
                 return Created($"api/trips/{theTrip.Name}", theTrip);
             }
-
-
+            
             return BadRequest("Bad data");
 
         }
