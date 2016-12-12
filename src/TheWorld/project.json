@@ -15,12 +15,13 @@
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
+    "AutoMapper": "4.2.1",
     "Microsoft.EntityFrameworkCore.Tools": {
       "version": "1.0.0-preview2-final",
       "type" : "build"
 
     }
-  },
+    },
 
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {

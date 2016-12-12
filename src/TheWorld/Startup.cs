@@ -12,6 +12,8 @@ using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using TheWorld.Models;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using TheWorld.ViewModels;
 
 namespace TheWorld
 {
@@ -72,6 +74,9 @@ namespace TheWorld
             ILoggerFactory factory)
         {
                                                         //            loggerFactory.AddConsole();
+            Mapper.Initialize(config => {
+                config.CreateMap<TripViewModel, Trip>().ReverseMap();
+            });
 
             if (env.IsDevelopment())
             {
