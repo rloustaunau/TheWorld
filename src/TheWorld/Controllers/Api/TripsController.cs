@@ -21,7 +21,7 @@ namespace TheWorld.Controllers.Api
             _logger = logger;
         }
 
-        [HttpGet("")]
+        [HttpGet("api/trips")]
         public IActionResult Get()
         {
             try
@@ -39,7 +39,7 @@ namespace TheWorld.Controllers.Api
             }
         }
 
-        [HttpPost("")]
+        [HttpPost("api/trips")]
         public async Task<IActionResult> Post([FromBody]TripViewModel theTrip)
         {
             if (ModelState.IsValid)
@@ -51,7 +51,7 @@ namespace TheWorld.Controllers.Api
                 {
                     return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
                 }
-                          
+
             }
             
             

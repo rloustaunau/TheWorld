@@ -32,7 +32,7 @@ namespace TheWorld.Models
 
         public async Task<bool> SaveChangesAsync()
         {
-            return (await _context.SaveChangesAsync())> 0;
+            return (await _context.SaveChangesAsync()) > 0;
         }
     }
 }

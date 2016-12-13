@@ -9,7 +9,7 @@ namespace TheWorld.Models
 
         void AddTrip(Trip trip);
 
-        async Task<bool> SaveChangesAsync();
+        Task<bool> SaveChangesAsync();
 
     }
 }
