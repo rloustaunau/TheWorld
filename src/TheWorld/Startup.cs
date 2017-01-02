@@ -76,6 +76,7 @@ namespace TheWorld
                                                         //            loggerFactory.AddConsole();
             Mapper.Initialize(config => {
                 config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stop>().ReverseMap();
             });
 
             if (env.IsDevelopment())
