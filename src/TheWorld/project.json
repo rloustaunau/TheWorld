@@ -18,9 +18,9 @@
     "AutoMapper": "5.2.0",
     "Microsoft.EntityFrameworkCore.Tools": {
       "version": "1.0.0-preview2-final",
-      "type" : "build"
-
-    }
+      "type": "build"
+    },
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0"
     },
 
   "tools": {

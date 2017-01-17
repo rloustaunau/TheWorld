@@ -8,6 +8,7 @@ using TheWorld.Services;
 using Microsoft.Extensions.Configuration;
 using TheWorld.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,20 +35,26 @@ namespace TheWorld.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            return View();                       
+        }
+
+        [Authorize]
+        public IActionResult Trips()
+        {
             try
             {
-                var data = _repository.GetAllTrips();
+                var trips = _repository.GetAllTrips();
 
-                return View(data);
+                return View(trips);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get trips in index page: { ex.Message}");
                 return Redirect("/error");
-            }
-            
-        }
 
+
+            }
+        }
         public IActionResult Contact()
         {
             //throw new InvalidOperationException("thrown exception!");

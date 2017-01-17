@@ -5,5 +5,8 @@
   },
   "ConnectionStrings": {
     "WorldContextConnectionDEV": "Server=HJZKWV1\\SQLEXPRESS;Database=TheWorldDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  },
+  "Keys": {
+    "Bingkey":  "DONTEVERPUTKEYSINSOURCECONTROL"
   }
 }
